@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-
+import { createGlobalStyle, css } from 'styled-components'
+//Template Literals = 1.6 rem = 16px, 1rem = 10px, 0.1rem = 1px
 export const GlobalStyles = createGlobalStyle`
  * {
     margin: 0; // espaço fora do elemento
@@ -7,7 +7,15 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box; // considera todos os elementos para calcular o tamanho
  }
 
- #root, body {
-    font: 16px Montserrat, sans-serif;
- }
+ ${({ theme }) => css`
+   html {
+     font-size: 62.5%;
+   }
+
+   #root,
+   body {
+     font: 1.6rem ${theme.font.family};
+   }
+ `}
+
 `
