@@ -1,18 +1,20 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, forwardRef } from 'react'
 import { Container } from './Input.styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  id: string
   label: string
   error?: string
 }
 
-export function Input({ id, label, error, ...props }: InputProps) {
+export default forwardRef<HTMLInputElement, InputProps>(function Input(
+  { id, label, error, ...props },
+  ref
+) {
   return (
     <Container error={Boolean(error)}>
       <label htmlFor={id}>{label}</label>
-      <input id={id} type="text" {...props} />
+      <input id={id} type="text" {...props} ref={ref} />
       {error && <p>{error}</p>}
     </Container>
   )
-}
+})
