@@ -10,7 +10,7 @@ import {
   LogoContainer
 } from '../Auth.styles'
 
-export function SignIn() {
+export function SignUp() {
   return (
     <Container>
       <FormContainer>
@@ -18,14 +18,17 @@ export function SignIn() {
           <Logo />
         </LogoContainer>
         <Heading>
-          <h1>Faça seu Login</h1>
+          <h1>Cadastro-se de graça</h1>
           <p>
-            Não tem uma conta?{' '}
-            <Link color="secondary" to="/cadastro">
-              Cadastre-se
+            Já tem uma conta?{' '}
+            <Link color="secondary" to="/">
+              Entrar
             </Link>{' '}
           </p>
         </Heading>
+        <InputContainer>
+          <Input id="name" label="Nome Completo" type="text" />
+        </InputContainer>
         <InputContainer>
           <Input id="email" label="Email" type="email" />
         </InputContainer>

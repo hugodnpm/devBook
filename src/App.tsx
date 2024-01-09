@@ -4,6 +4,7 @@ import { GlobalStyles } from './styles/global'
 
 import { theme } from './styles/theme'
 import { SignIn } from './pages/Auth/SignIn/SignIn'
+import { SignUp } from './pages/Auth/SignUp'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />} />
+          <Route path="/cadastro" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
