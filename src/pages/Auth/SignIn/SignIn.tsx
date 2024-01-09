@@ -1,4 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input/'
 import { Link } from '../../../components/Link'
@@ -11,13 +14,26 @@ import {
   LogoContainer
 } from '../Auth.styles'
 
-interface SignInForm {
-  email: string
-  password: string
-}
+const validationSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: 'Email é obrigatório' })
+    .email({ message: 'insira um E-mail Válido' }),
+  password: z
+    .string()
+    .min(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
+})
+
+type SignInForm = z.infer<typeof validationSchema>
 
 export function SignIn() {
-  const { register, handleSubmit } = useForm<SignInForm>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<SignInForm>({
+    resolver: zodResolver(validationSchema)
+  })
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {}
   return (
@@ -41,6 +57,7 @@ export function SignIn() {
               id="email"
               label="Email"
               type="email"
+              error={errors.email?.message}
               {...register('email')}
             />
           </InputContainer>
@@ -49,6 +66,7 @@ export function SignIn() {
               id="password"
               label="Senha"
               type="password"
+              error={errors.password?.message}
               {...register('password')}
             />
           </InputContainer>
