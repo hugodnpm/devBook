@@ -27,7 +27,8 @@
   "plugins": [
     "react",
     "react-hooks",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "@tanstack/query"
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
