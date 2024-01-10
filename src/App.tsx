@@ -5,16 +5,19 @@ import { GlobalStyles } from './styles/global'
 import { theme } from './styles/theme'
 import { SignIn } from './pages/Auth/SignIn/SignIn'
 import { SignUp } from './pages/Auth/SignUp'
+import { AuthProvider } from './context/AuthContext'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<SignIn />} />
-          <Route path="/cadastro" element={<SignUp />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/cadastro" element={<SignUp />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
   )
