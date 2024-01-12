@@ -36,6 +36,7 @@ export function SignIn() {
     resolver: zodResolver(validationSchema)
   })
   const { signIn } = useAuth()
+
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     signIn(data)
   }
