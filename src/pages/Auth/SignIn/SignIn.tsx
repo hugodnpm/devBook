@@ -15,9 +15,9 @@ import {
 } from '../Auth.styles'
 import { useAuth } from '../../../hooks/useAuth'
 import { AlertBanner } from '../../../components/AlertBanner'
-import { useState } from 'react'
-import { isAxiosError } from 'axios'
+
 import { useError } from '../../../hooks/useError'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 const validationSchema = z.object({
   email: z
@@ -39,18 +39,25 @@ export function SignIn() {
   } = useForm<SignInForm>({
     resolver: zodResolver(validationSchema)
   })
-  const { signIn } = useAuth()
+  const { signIn, isAuthenticated } = useAuth()
   const { error, handleError, clearError } = useError()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const from = location.state?.from?.pathname || '/home'
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     try {
       clearError()
       await signIn(data)
+      navigate(from)
     } catch (error) {
       handleError(error)
     }
   }
-
+  if (isAuthenticated) {
+    return <Navigate to="/home" />
+  }
   return (
     <Container>
       <FormContainer>
