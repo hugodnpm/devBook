@@ -7,6 +7,8 @@ import { SignIn } from './pages/Auth/SignIn/SignIn'
 import { SignUp } from './pages/Auth/SignUp'
 import { AuthProvider } from './context/AuthContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Home } from './pages/Home/Home'
+import { RequireAuth } from './components/RequireAuth'
 
 const queryClient = new QueryClient()
 
@@ -20,6 +22,14 @@ function App() {
             <Routes>
               <Route path="/" element={<SignIn />} />
               <Route path="/cadastro" element={<SignUp />} />
+              <Route
+                path="/home"
+                element={
+                  <RequireAuth>
+                    <Home />
+                  </RequireAuth>
+                }
+              />
             </Routes>
           </AuthProvider>
         </QueryClientProvider>
