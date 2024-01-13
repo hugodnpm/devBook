@@ -15,6 +15,9 @@ import {
 } from '../Auth.styles'
 import { useAuth } from '../../../hooks/useAuth'
 import { AlertBanner } from '../../../components/AlertBanner'
+import { useState } from 'react'
+import { isAxiosError } from 'axios'
+import { useError } from '../../../hooks/useError'
 
 const validationSchema = z.object({
   email: z
@@ -37,10 +40,17 @@ export function SignIn() {
     resolver: zodResolver(validationSchema)
   })
   const { signIn } = useAuth()
+  const { error, handleError, clearError } = useError()
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
-    signIn(data)
+    try {
+      clearError()
+      await signIn(data)
+    } catch (error) {
+      handleError(error)
+    }
   }
+
   return (
     <Container>
       <FormContainer>
@@ -76,7 +86,7 @@ export function SignIn() {
             />
           </InputContainer>
           <Button fullWidth={true}>Entrar</Button>
-          <AlertBanner variant="error" message="Deu ruim" />
+          {error && <AlertBanner variant="error" message={error} />}
         </form>
       </FormContainer>
     </Container>
