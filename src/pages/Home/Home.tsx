@@ -1,3 +1,12 @@
+import { useEffect } from 'react'
+import { api } from '../../services/api'
+
 export function Home() {
-  return <h1>Logado</h1>
+  useEffect(() => {
+    api
+      .get('/books')
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error))
+  }, [])
+  return <h1>HOME - Logado</h1>
 }
