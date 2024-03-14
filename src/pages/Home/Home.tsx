@@ -1,12 +1,9 @@
-import { useEffect } from 'react'
-import { api } from '../../services/api'
+import { MainLayout } from '../../layout/MainLayout'
 
 export function Home() {
-  useEffect(() => {
-    api
-      .get('/books')
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error))
-  }, [])
-  return <h1>HOME - Logado</h1>
+  return (
+    <MainLayout>
+      <h1>HOME - Logado</h1>
+    </MainLayout>
+  )
 }

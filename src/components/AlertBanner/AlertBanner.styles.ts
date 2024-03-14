@@ -27,7 +27,7 @@ export const Container = styled.div<ContainerProps>`
     gap: ${theme.spacings.xxsmall}; // espaço entre os elementos
     padding: 1.4rem; // espaço dentro do elemento
     width: 100%; // ocupa 100% da largura do elemento pai
-    border-radius: ${theme.border.radius.default}; // areedonda as pontas
+    border-radius: ${theme.border.radius.default}; // arredonda as pontas
     margin-top: ${theme.spacings.small}; // espaço fora do elemento acima
     font-weight: ${theme.font.weight.normal}; // colocar em negrito
 
